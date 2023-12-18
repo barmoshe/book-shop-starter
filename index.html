@@ -2,32 +2,47 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>My book shop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <title>My Book Shop</title>
 </head>
 
 <body onload="onInit()">
-  <h1>Welcome to my book shop</h1>
+    <header>
+        <h1>My Book Shop</h1>
+    </header>
 
-  <section class="books-container">
-    <div class="table-titles">
-      <h4>id</h4>
-      <h4>name</h4>
-      <h4>price</h4>
-      <h4>picture</h4>
-      <h4>actions</h4>
+    <section class="books-container">
+        <div class="search-container">
+            <label for="searchInput">Search:</label>
+            <input type="text" id="searchInput" oninput="onFilterBooks()" placeholder="Enter book title...">
+        </div>
+
+        <div class="table-titles">
+            <h4>ID</h4>
+            <h4>Name</h4>
+            <h4>Price</h4>
+            <h4>Picture</h4>
+            <h4>Actions</h4>
+        </div>
+
+        <ul class="book-list">
+            <!-- The data is inserted here dynamically from the JS file -->
+        </ul>
+
+    </section>
+    <button class="add-btn" onclick="onAddBook()">Add Book</button>
+    <div id="bookDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="hide-btn" onclick="closeModal()">&times;</span>
+            <!-- Book details content goes here -->
+        </div>
     </div>
 
-    <ul class="book-list">
-      <!-- The data is inserted here dynamically from the JS file -->
-    </ul>
-
-  </section>
-
-
-  <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
