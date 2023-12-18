@@ -1,6 +1,12 @@
 'use strict';
 
 let gBooks = _createBooks();
+let isGridView = JSON.parse(localStorage.getItem('isGridView')) || false;
+
+function toggleView() {
+    isGridView = !isGridView;
+    renderBooks();
+}
 
 function onInit() {
     gBooks = loadBooksFromStorage() || gBooks;
@@ -13,36 +19,78 @@ function loadBooksFromStorage() {
 }
 
 function renderBooks(filteredBooks = gBooks) {
-    //if there are no books to display, add <p> tag with "No books to display" message
-    if (!filteredBooks.length) {
-        const elBookList = document.querySelector('.book-list');
+    const elBookList = document.querySelector('.book-list');
+
+    if (filteredBooks.length === 0) {
         elBookList.innerHTML = '<p>No books to display</p>';
         return;
     }
-    const strHTMLs = filteredBooks.map((book) => {
-        return `<li class="book-preview" data-id="${book.id}" >
-        <h4>${book.id}</h4>
-        <h4>${book.name}</h4>
-        <h4>${book.price}$</h4>
-        <div><img class="book-img" src="${book.imgUrl}"></div>
-        <div>
-            <button onclick="onReadBook('${book.id}')" class="btn-read">Read</button>
-            <button onclick="onUpdateBook('${book.id}')" class="btn-update">Update</button>
-            <button onclick="onRemoveBook('${book.id}')" class="btn-remove">Remove</button>
-        </div>
-    </li>`;
-    });
 
-    const elBookList = document.querySelector('.book-list');
-    elBookList.innerHTML = strHTMLs.join('');
+    const viewClass = isGridView ? 'grid-view' : 'list-view';
+    elBookList.className = `book-list ${viewClass}`;
+
+    if (isGridView) {
+        // Render grid view
+        const strHTMLs = filteredBooks.map((book) => createBookHTMLGrid(book));
+        elBookList.innerHTML = strHTMLs.join('');
+    } else {
+        // Render table view
+        const tableHTML = createBookHTMLTable(filteredBooks);
+        elBookList.innerHTML = tableHTML;
+    }
+
     saveBooksToStorage();
+}
+
+function createBookHTMLGrid(book) {
+    return `
+        <li class="book-preview" data-id="${book.id}">
+            <div class="book_details_element"><h3>${book.name}</h3></div>
+            <div class="price"><p>Price: ${book.price}$</p> </div>
+            <div class="book_details_element"><img src="${book.imgUrl}" class="book-img" alt="${book.name}" /> </div>
+            <div class="book_details_element">  
+                <button onclick="onReadBook('${book.id}')" class="btn-read">Read</button> 
+                <button onclick="onUpdateBook('${book.id}')" class="btn-update">Update</button>
+                <button onclick="onRemoveBook('${book.id}')" class="btn-remove">Remove</button>
+            </div>
+        </div>
+        </li>`;
+}
+
+function createBookHTMLTable(books) {
+    return `
+        <table class="book-table">
+            <thead class="book-table-header">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="book-table-body">
+                ${books.map((book) => `
+                    <tr  data-id="${book.id}">
+                        <td>${book.id}</td>
+                        <td>${book.name}</td>
+                        <td>${book.price}$</td>
+                        <td><img src="${book.imgUrl}" alt="${book.name}" class="book-img" /></td>
+                        <td>
+                            <button onclick="onReadBook('${book.id}')" class="btn-read">Read</button>
+                            <button onclick="onUpdateBook('${book.id}')" class="btn-update">Update</button>
+                            <button onclick="onRemoveBook('${book.id}')" class="btn-remove">Remove</button>
+                        </td>
+                    </tr>`).join('')}
+            </tbody>
+        </table>`;
 }
 
 function saveBooksToStorage() {
     const booksJSON = JSON.stringify(gBooks);
     localStorage.setItem('books', booksJSON);
+    localStorage.setItem('isGridView', JSON.stringify(isGridView));
 }
-
 
 function onRemoveBook(bookId) {
     const bookIndex = gBooks.findIndex(book => book.id === bookId);
@@ -189,6 +237,10 @@ sr = ScrollReveal({
     reset: false,
 });
 
-sr.reveal('.book-preview', {
-    interval: 200,
-});
+sr.reveal('.book-table-body', { delay: 200 });
+sr.reveal('.book-preview', { delay: 100000 });
+sr.reveal('.book-details', { delay: 200 });
+sr.reveal('.btn-read', { delay: 200 });
+sr.reveal('.btn-update', { delay: 200 });
+sr.reveal('.btn-remove', { delay: 200 });
+sr.reveal('.btn-add', { delay: 200 });
