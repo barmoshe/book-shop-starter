@@ -9,7 +9,7 @@ function toggleView() {
 }
 
 function onInit() {
-    gBooks = loadBooksFromStorage() || gBooks;
+    //gBooks = loadBooksFromStorage() || gBooks;
     renderBooks();
 }
 
@@ -236,17 +236,3 @@ function toggleHoverClass(bookId) {
     const bookPreview = document.querySelector(`.book-preview[data-id="${bookId}"]`);
     bookPreview.classList.toggle('hovered');
 }
-sr = ScrollReveal({
-    origin: 'top',
-    distance: '35px',
-    duration: 1000,
-    reset: false,
-});
-
-sr.reveal('.book-table-body', { delay: 200 });
-sr.reveal('.book-preview', { delay: 100000 });
-sr.reveal('.book-details', { delay: 200 });
-sr.reveal('.btn-read', { delay: 200 });
-sr.reveal('.btn-update', { delay: 200 });
-sr.reveal('.btn-remove', { delay: 200 });
-sr.reveal('.btn-add', { delay: 200 });
