@@ -9,7 +9,7 @@ function toggleView() {
 }
 
 function onInit() {
-    //gBooks = loadBooksFromStorage() || gBooks;
+    gBooks = loadBooksFromStorage() || gBooks;
     renderBooks();
 }
 
@@ -185,12 +185,12 @@ function closeModal() {
 
 function _createBooks() {
     const books = [
-        _createBook('Harry Potter', 200, '../img/harry_potter.jpeg'),
-        _createBook('How To Sketch', 120, '../img/how_to_sketch.jpg'),
-        _createBook('Animals 101', 120, '../img/101_animals.jpg'),
-        _createBook('JS secrets', 50, '../img/js.jpg'),
-        _createBook('Lion King', 90, '../img/lion-king.jpg'),
-        _createBook('Mastering CSS', 135, '../img/css.jpg'),
+        _createBook('Harry Potter', 200, 'img/harry_potter.jpeg'),
+        _createBook('How To Sketch', 120, 'img/how_to_sketch.jpg'),
+        _createBook('Animals 101', 120, 'img/101_animals.jpg'),
+        _createBook('JS secrets', 50, 'img/js.jpg'),
+        _createBook('Lion King', 90, 'img/lion-king.jpg'),
+        _createBook('Mastering CSS', 135, 'img/css.jpg'),
     ]
     return books
 }
