@@ -185,7 +185,7 @@ function closeModal() {
 
 function _createBooks() {
     const books = [
-        _createBook('harry_potter', 200, 'img/harry_potter.jpeg'),
+        _createBook('Harry Potter', 200, 'img/harry_potter.jpeg'),
         _createBook('How To Sketch', 120, 'img/how_to_sketch.jpg'),
         _createBook('Animals 101', 120, 'img/101_animals.jpg'),
         _createBook('JS secrets', 50, 'img/js.jpg'),
