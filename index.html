@@ -20,7 +20,10 @@
             <label for="searchInput">Search:</label>
             <input type="text" id="searchInput" oninput="onFilterBooks()" placeholder="Enter book title...">
         </div>
-        <button class="view-toggle-btn" onclick="toggleView()">Toggle View</button>
+        <div class="menu-container">
+            <button class="add-btn" onclick="onAddBook()">Add Book</button>
+            <button class="view-toggle-btn" onclick="toggleView()">Toggle View</button>
+        </div>
 
 
 
@@ -30,7 +33,6 @@
         </ul>
 
     </section>
-    <button class="add-btn" onclick="onAddBook()">Add Book</button>
     <div id="bookDetailsModal" class="modal">
         <div class="modal-content">
             <span class="hide-btn" onclick="closeModal()">&times;</span>
