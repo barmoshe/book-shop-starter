@@ -22,7 +22,7 @@ function renderBooks(filteredBooks = gBooks) {
     const elBookList = document.querySelector('.book-list');
 
     if (filteredBooks.length === 0) {
-        elBookList.innerHTML = '<p>No books to display</p>';
+        elBookList.innerHTML = '<h1>No books to display</h1>';
         return;
     }
 
@@ -176,6 +176,7 @@ function changeRating(bookId, action) {
 
         document.getElementById("rating").textContent = book.rate;
     }
+    saveBooksToStorage();
 }
 
 function closeModal() {
@@ -230,9 +231,4 @@ function _makeLorem(wordCount = 100) {
     }
 
     return loremText.trim();
-}
-
-function toggleHoverClass(bookId) {
-    const bookPreview = document.querySelector(`.book-preview[data-id="${bookId}"]`);
-    bookPreview.classList.toggle('hovered');
 }

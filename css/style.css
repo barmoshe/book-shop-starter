@@ -253,7 +253,10 @@ input {
 /* Table styles */
 
 .book-table {
-    width: 100%;
+    /*set the table to center*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -336,7 +339,7 @@ input {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 33px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     width: 200px;
     /* Set a fixed width for each book preview */
